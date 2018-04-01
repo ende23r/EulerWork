@@ -107,9 +107,39 @@ namespace Euler
             return 0;
         }
 
+        static bool isPalindrome(string s)
+        {
+            int mid = s.Length / 2;
+            for (int i=0; i < mid; i++)
+            {
+                if (s[i] != s[s.Length - i - 1])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        /* Return the largest palindromic number that is a multiple of two three-digit numbers. */
+        static int problem4()
+        {
+            int largest = 0;
+            for (int i=800; i < 1000; i++)
+            {
+                for (int j=i; j < 1000; j++)
+                {
+                    int prod = i * j;
+                    if( isPalindrome(string.Format("{0}", prod)) && (prod > largest) )
+                    {
+                        largest = prod;
+                    }
+                }
+            }
+            return largest;
+        }
+
         static void Main(string[] args)
         {
-            int result = problem3();
+            int result = problem4();
             Console.WriteLine(result);
             Console.ReadLine();
         }
