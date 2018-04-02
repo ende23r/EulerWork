@@ -63,7 +63,7 @@ namespace Euler
 
     class Euler
     {
-        /* Add up all multiples of 3 and 5 less than 1000 */
+        /* SOLVED! Add up all multiples of 3 and 5 less than 1000 */
         static int problem1()
         {
             int sum = 0;
@@ -78,7 +78,7 @@ namespace Euler
             return sum;
         }
 
-        /* Add all even fibbonacci numbers less than or equal to 4 million. */
+        /* SOLVED! Add all even fibbonacci numbers less than or equal to 4 million. */
         static int problem2()
         {
             int prev = 1;
@@ -101,6 +101,7 @@ namespace Euler
         }
 
         /* Finds the largest prime factor of 600,851,475,143 */
+        // Square root is about 775147.
         static int problem3()
         {
             ArbInt prod = new ArbInt("600851475143");
@@ -119,7 +120,7 @@ namespace Euler
             }
             return true;
         }
-        /* Return the largest palindromic number that is a multiple of two three-digit numbers. */
+        /* SOLVED! Return the largest palindromic number that is a multiple of two three-digit numbers. */
         static int problem4()
         {
             int largest = 0;
@@ -137,9 +138,32 @@ namespace Euler
             return largest;
         }
 
+        /* Finds the smallest number that is evenly divisible by all the numbers 1 to 20 */
+        static int problem5()
+        {
+            int tester = 20;
+
+            bool found = false;
+            while (!found)
+            {
+                tester++;
+                found = true;
+                for(int i=2; i<20; i++)
+                {
+                    if((tester % i) != 0)
+                    {
+                        found = false;
+                        break;
+                    }
+                }
+            }
+
+            return tester;
+        }
+
         static void Main(string[] args)
         {
-            int result = problem4();
+            int result = problem5();
             Console.WriteLine(result);
             Console.ReadLine();
         }
