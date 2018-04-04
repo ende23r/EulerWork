@@ -7,6 +7,7 @@ namespace Euler
     /* Class for integers of arbitrary size */
     class ArbInt
     {
+        //Loaded back to front; index 0 is least significant
         private List<int> pieces;
         private static int digits_per_int = 9;
 
@@ -20,6 +21,18 @@ namespace Euler
         {
             pieces = new List<int>();
             pieces.Add(i);
+        }
+
+        public string toString()
+        {
+            string s = "";
+
+            for(int i=0; i < pieces.Count; i++)
+            {
+                s = pieces[i].ToString() + s;
+            }
+
+            return s;
         }
 
         public ArbInt(String s)
@@ -50,14 +63,14 @@ namespace Euler
             }
         }
 
-        public void add(int i)
-        {
-
-        }
-
         public void add(ArbInt ai)
         {
+            int end = Math.Min(this.pieces.Count, ai.pieces.Count);
 
+            for(int i=0; i < end; i++)
+            {
+                this.pieces[i] += ai.pieces[i];
+            }
         }
     }
 
@@ -138,7 +151,7 @@ namespace Euler
             return largest;
         }
 
-        /* Finds the smallest number that is evenly divisible by all the numbers 1 to 20 */
+        /* SOLVED! Finds the smallest number that is evenly divisible by all the numbers 1 to 20 */
         static int problem5()
         {
             int tester = 20;
@@ -163,8 +176,16 @@ namespace Euler
 
         static void Main(string[] args)
         {
-            int result = problem5();
-            Console.WriteLine(result);
+            ArbInt a = new ArbInt("9999");
+            ArbInt b = new ArbInt(1);
+
+            Console.WriteLine(a.toString());
+            Console.WriteLine(b.toString());
+            a.add(b);
+            Console.WriteLine(a.toString());
+
+            //int result = problem5();
+            //Console.WriteLine(result);
             Console.ReadLine();
         }
     }
