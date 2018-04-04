@@ -65,11 +65,25 @@ namespace Euler
 
         public void add(ArbInt ai)
         {
+            int biggest = (int)Math.Pow(10, digits_per_int);
             int end = Math.Min(this.pieces.Count, ai.pieces.Count);
-
+            int carry = 0;
             for(int i=0; i < end; i++)
             {
-                this.pieces[i] += ai.pieces[i];
+                int tmpsum = Math.Abs(this.pieces[i]) + Math.Abs(ai.pieces[i]);
+                if (tmpsum <= biggest)
+                {
+                    this.pieces[i] += ai.pieces[i] + carry;
+                    carry = 0;
+                }
+
+                else
+                {
+                    Console.WriteLine("Overflow!");
+                    int room = biggest - this.pieces[i];
+                    this.pieces[i] = ai.pieces[i] - room;
+                    carry = 1;
+                }
             }
         }
     }
@@ -176,12 +190,12 @@ namespace Euler
 
         static void Main(string[] args)
         {
-            ArbInt a = new ArbInt("9999");
-            ArbInt b = new ArbInt(1);
-
-            Console.WriteLine(a.toString());
-            Console.WriteLine(b.toString());
-            a.add(b);
+            ArbInt a = new ArbInt("1000000");
+            for(int i=0; i < 30; i++)
+            {
+                Console.WriteLine(a.toString());
+                a.add(a);
+            }
             Console.WriteLine(a.toString());
 
             //int result = problem5();
