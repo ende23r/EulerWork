@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Numerics;
 
 namespace Euler
 {
@@ -43,12 +44,35 @@ namespace Euler
             return sum;
         }
 
-        /* Finds the largest prime factor of 600,851,475,143 */
+        /* SOLVED! Finds the largest prime factor of 600,851,475,143 */
         // Square root is about 775147.
         static int problem3()
         {
-            ArbInt prod = new ArbInt("600851475143");
-            return 0;
+            BigInteger prod = BigInteger.Parse("600851475143");
+            BigInteger zero = new BigInteger(0);
+
+            int largest = 1;
+            bool[] notPrime = new bool[780000]; //Assume all #s are prime
+
+            for(int i=2; i<notPrime.Length; i++)
+            {
+                if (!notPrime[i]) 
+                {
+                    //i is prime! Let's use it in our sieve
+                    BigInteger bigval = new BigInteger(i);
+                    if ( BigInteger.Remainder(prod, bigval).Equals( zero ) )
+                    {
+                        largest = i;
+                    }
+
+                    for(int j=i*2; j < notPrime.Length; j += i)
+                    {
+                        notPrime[j] = true;
+                    }
+                }
+            }
+
+            return largest;
         }
 
         static bool isPalindrome(string s)
@@ -106,16 +130,8 @@ namespace Euler
 
         static void Main(string[] args)
         {
-            ArbInt a = new ArbInt("1000000");
-            for(int i=0; i < 30; i++)
-            {
-                Console.WriteLine(a.toString());
-                a.add(a);
-            }
-            Console.WriteLine(a.toString());
-
-            //int result = problem5();
-            //Console.WriteLine(result);
+            int result = problem3();
+            Console.WriteLine(result);
             Console.ReadLine();
         }
     }
