@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Numerics;
 
 namespace Euler
 {
@@ -46,27 +45,21 @@ namespace Euler
 
         /* SOLVED! Finds the largest prime factor of 600,851,475,143 */
         // Square root is about 775147.
-        static int problem3()
-        {
-            BigInteger prod = BigInteger.Parse("600851475143");
-            BigInteger zero = new BigInteger(0);
+        static int problem3() {
+            long prod = 600851475143L; //THIS IS WRONG BECAUSE A LONG CAN STORE UP TO 18 DECIMAL DIGITS
 
             int largest = 1;
             bool[] notPrime = new bool[780000]; //Assume all #s are prime
 
-            for(int i=2; i<notPrime.Length; i++)
-            {
-                if (!notPrime[i]) 
-                {
+            for(int i=2; i<notPrime.Length; i++) {
+                if (!notPrime[i]) {
                     //i is prime! Let's use it in our sieve
-                    BigInteger bigval = new BigInteger(i);
-                    if ( BigInteger.Remainder(prod, bigval).Equals( zero ) )
-                    {
+                    if ( prod % i == 0 ) {
                         largest = i;
                     }
 
-                    for(int j=i*2; j < notPrime.Length; j += i)
-                    {
+                    for(int j=i*2; j < notPrime.Length; j += i) {
+                        //remove composites
                         notPrime[j] = true;
                     }
                 }
