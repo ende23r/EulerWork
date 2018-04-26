@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HashMap.cs" />
+    <Compile Include="Trie.cs" />
+    <Compile Include="Vector.cs" />
     <Compile Include="Euler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
