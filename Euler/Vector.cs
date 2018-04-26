@@ -29,7 +29,6 @@ namespace Euler
                 arr = temp;
             }
             arr[used++] = item;
-            
         }
 
         public T Retreive(int index) {
@@ -38,9 +37,6 @@ namespace Euler
             }
             //else throw exception
             return default(T);
-        }
-
-        
         }
     }
 }
